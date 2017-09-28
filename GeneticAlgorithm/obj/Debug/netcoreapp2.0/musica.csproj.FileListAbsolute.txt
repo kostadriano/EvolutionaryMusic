@@ -1,0 +1,10 @@
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/bin/Debug/netcoreapp2.0/musica.deps.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/bin/Debug/netcoreapp2.0/musica.runtimeconfig.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/bin/Debug/netcoreapp2.0/musica.runtimeconfig.dev.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/bin/Debug/netcoreapp2.0/musica.dll
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/bin/Debug/netcoreapp2.0/musica.pdb
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/Debug/netcoreapp2.0/musica.csproj.CoreCompileInputs.cache
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/Debug/netcoreapp2.0/musica.AssemblyInfoInputs.cache
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/Debug/netcoreapp2.0/musica.AssemblyInfo.cs
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/Debug/netcoreapp2.0/musica.dll
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/Debug/netcoreapp2.0/musica.pdb
