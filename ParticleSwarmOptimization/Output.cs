@@ -3,7 +3,7 @@ using System.IO;
 
 public class Output
 {
-     public static void scoreGenerator(Individuals[] population,String path)
+     public static void scoreGenerator(Particles[] population,String path)
         {
             Stream arquivo = File.Open("entrada.txt", FileMode.Open);
             StreamReader leitor = new StreamReader(arquivo);

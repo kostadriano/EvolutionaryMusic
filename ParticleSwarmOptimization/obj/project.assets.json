@@ -208,7 +208,7 @@
   },
   "libraries": {
     "Microsoft.NETCore.App/2.0.0-preview2-25407-01": {
-      "sha512": "BHAEXEJFuA4rq5wJuKNgDnl18VW7lFkiKAN0WT/mo6BBeNJToEz6hIVD78K3zv4yD4Dbe/4tpe8lFeMIDendrA==",
+      "sha512": "I5q8/WyWOv+3PsolMAA379TzqycRrAL2YQHxDdUyqylseBJc60hOmjrFXJxnXlYtqf9/RDfsZPgq0dEJ5b1OUg==",
       "type": "package",
       "path": "microsoft.netcore.app/2.0.0-preview2-25407-01",
       "files": [
@@ -1317,7 +1317,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetAppHost/2.0.0-preview2-25407-01": {
-      "sha512": "tqbZ86qr0OTMe7L5s74XDfvz25a25324HGcfkXqSeHcmsmQRRAzGhk8Pgm0VSkET+UDop3/GDaIVepFCIsM2pA==",
+      "sha512": "mEBIOBAgF2pVzwZTuV3ckzvCFQX3SgVg8pkKZtW4jHNXOXQqmC5vC++4ubf7BJOIckcIp34SEPM+cR2DoRhDNA==",
       "type": "package",
       "path": "microsoft.netcore.dotnetapphost/2.0.0-preview2-25407-01",
       "files": [
@@ -1329,7 +1329,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/2.0.0-preview2-25407-01": {
-      "sha512": "JMQ50FswhZEZsisvvwsYI+FnhB+AJZZDbLnlf7ngPYWO/gMF8wHGRc/oDiYF92PvdnwpvcUyta4KVhcNrEPefA==",
+      "sha512": "SpXLTyj3uUODzBCdHGLKCmH7HZxkKCkMPvQ1QWrGwRSXaKX+FIT1QIVo2wkkH+vTT95PWYpYO3Zxb3HSJZ0g8g==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/2.0.0-preview2-25407-01",
       "files": [
@@ -1341,7 +1341,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/2.0.0-preview2-25407-01": {
-      "sha512": "haS7KQe2ztP86c50lAGrrO3BsyCICrfJHaluiVCBJPiF+dElACK6ivYwsguWCAsTFJ32mMN4GDn2Fh6OWMVJaw==",
+      "sha512": "QkqakAEQFZQa3Glq6KsEdfTqmLORwF4nwc1P/92+WZILuuqa/iINLqqgt0/9/j7TV232iXf33XX4zJwOj1Z3hQ==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/2.0.0-preview2-25407-01",
       "files": [
@@ -1353,7 +1353,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0-preview2-25405-01": {
-      "sha512": "7aK/i7t55tQc2DGvgucKVmMX5I/TabFiMOoKLs7GQ/lglHR6cEN/anOP818sDIdxYm2B4WRIeH/0T46ZR7jGqA==",
+      "sha512": "05qbWH6fVJCA08Loh/ttr7Qq2dWYwba3Q8AD5TerdYA/yiRbVNjELWZz6vVNE0MpWyu2eIKlmw/LqSq3XbZlbQ==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0-preview2-25405-01",
       "files": [
@@ -1368,7 +1368,7 @@
       ]
     },
     "Microsoft.Packaging.Tools/1.0.0-preview2-25401-01": {
-      "sha512": "SuIDZTuyXCpuZp7cSt3rMZa6hy76rJmdtlgUr9wolQkrGuaEnNl/+SM9MCVoRfpUTRcUMPZLpPeZX9vmWLH4mQ==",
+      "sha512": "h4Zrq2/gZrMz/8fG/HNUGxyIkA5D2pyjRSfzLj55PMHsrADsMNDidPbK8cNhnc5RTRmLOQyaub0+iPPZiWeGLw==",
       "type": "package",
       "path": "microsoft.packaging.tools/1.0.0-preview2-25401-01",
       "files": [
@@ -1386,7 +1386,7 @@
       ]
     },
     "NETStandard.Library/2.0.0-preview2-25401-01": {
-      "sha512": "uTOXlk4u9DFetP199q2SM37/105f1gsyHWCiNBXZCQ24hIVj8nBcxVOQauf5eHOEYNRlIySzkqaxPQ5qBJOGPQ==",
+      "sha512": "goCvZ+OsDZcnme0HlY7W3OuSvgW+gMaS03BzN5WrDUL22cdnVHXa8X3zNqRNChSOhWoLpG7Ss6odmEeBq+XYdg==",
       "type": "package",
       "path": "netstandard.library/2.0.0-preview2-25401-01",
       "files": [
@@ -1519,25 +1519,25 @@
     ]
   },
   "packageFolders": {
-    "/home/adriano/.nuget/packages/": {}
+    "/home/stheffany/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/musica.csproj",
+      "projectUniqueName": "/home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/musica.csproj",
       "projectName": "musica",
-      "projectPath": "/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/musica.csproj",
-      "packagesPath": "/home/adriano/.nuget/packages/",
-      "outputPath": "/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/MusicaEvolutiva/musica/obj/",
+      "projectPath": "/home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/musica.csproj",
+      "packagesPath": "/home/stheffany/.nuget/packages/",
+      "outputPath": "/home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/adriano/.nuget/NuGet/NuGet.Config"
+        "/home/stheffany/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "/home/adriano/.dotnet/NuGetFallbackFolder": {},
+        "/home/stheffany/.dotnet/NuGetFallbackFolder": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
