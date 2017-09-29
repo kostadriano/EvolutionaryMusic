@@ -2,19 +2,8 @@ using System;
 
 public class Global
 {
-    public char[] GNotes
-    {
-        get { return GNotes; }
-        set { GNotes = value; }
-    }
-    public int[] GTimes
-    {
-        get { return GTimes; }
-        set { GTimes = value; }
-    }
-    public float GFitness
-    {
-        get { return GFitness; }
-        set { GFitness = value; }
-    }
+    public float w {get; set;}
+    public char[] GNotes {get; set;}
+    public int[] GTimes {get; set;}
+    public float GFitness {get; set;}
 }

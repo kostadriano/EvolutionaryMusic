@@ -11,10 +11,12 @@ public class Particles
     public char[] PNotes { get; set; }
     public int[] PTimes { get; set; }
     public float[] SpeedTimes { get; set; }
-    public static int PopulationSize;
+    public static int PopulationSize = 30;
     private int TotalTime;
     public float Fitness { get; set; }
     public float PFitness { get; set; }
+    public float[] y1 { get; set; }
+    public float[] y2 { get; set; }
 
     public Particles()
     {
@@ -31,8 +33,6 @@ public class Particles
             Random rd = new Random();
             Times[i] = timeGenerate();
             Notes[i] = NoteNames[rd.Next(0, 7)];
-            SpeedNotes[i] = NoteNames[0];
-            SpeedTimes[i] = 0;
 
         }
 
