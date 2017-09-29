@@ -7,17 +7,25 @@ namespace musicaevolutiva
     {
         static void Main(string[] args)
         {
-            Individuals.PopulationSize = 50;
-            int NGeracoes = 20;
-            Individuals[] population = new Individuals[Individuals.PopulationSize];
+            Particles.PopulationSize = 50;
+           
+            Particles[] population = new Particles[Particles.PopulationSize];
+            char[] GNotes;
+            int[] GTimes;
+            
 
             for (int i = 0; i < population.Length; i++)
             {
-                population[i] = new Individuals();
+                population[i] = new Particles();
                 population[i].Initiate();
                 population[i].FitnessCalculate();
             }
-            population = AG.OrderBy(population);
+           
+            
+            
+
+
+            // SAIDAS
             Output.scoreGenerator(population, "populacaooriginal.ly");
 
             AG ag = new AG();
@@ -25,8 +33,8 @@ namespace musicaevolutiva
 
             using (StreamWriter writer = new StreamWriter("melhores.ods", true))
             {
-                writer.WriteLine("Geracoes:," + NGeracoes + ",Tamanho da Populacao," + Individuals.PopulationSize);
-                writer.WriteLine("Selecionados," + Individuals.PopulationSize * 0.3 + ",Mutação, 0.10");
+                writer.WriteLine("Geracoes:," + NGeracoes + ",Tamanho da Populacao," + Particles.PopulationSize);
+                writer.WriteLine("Selecionados," + Particles.PopulationSize * 0.3 + ",Mutação, 0.10");
           
             }
 

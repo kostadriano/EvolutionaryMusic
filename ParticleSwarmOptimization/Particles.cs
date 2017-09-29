@@ -1,18 +1,25 @@
 using System;
-public class Individuals
+
+
+public class Particles
 {
     public const int Size = 20;
     public static string NoteNames = "abcdefg";
-    private int[] Times;
-    private char[] Notes;
+    public int[] Times { get; set; }
+    public char[] Notes { get; set; }
+    public float[] SpeedNotes { get; set; }
+    public char[] PNotes { get; set; }
+    public int[] PTimes { get; set; }
+    public float[] SpeedTimes { get; set; }
     public static int PopulationSize;
     private int TotalTime;
-    private float Fitness;
+    public float Fitness { get; set; }
+    public float PFitness { get; set; }
 
-    public Individuals()
+    public Particles()
     {
-        Notes = new char[Individuals.Size];
-        Times = new int[Individuals.Size];
+        Notes = new char[Particles.Size];
+        Times = new int[Particles.Size];
 
     }
     public void Initiate()
@@ -24,7 +31,16 @@ public class Individuals
             Random rd = new Random();
             Times[i] = timeGenerate();
             Notes[i] = NoteNames[rd.Next(0, 7)];
+            SpeedNotes[i] = NoteNames[0];
+            SpeedTimes[i] = 0;
+
         }
+
+        // inicializando memória local
+        PTimes = Times;
+        PNotes = Notes;
+        PFitness = Fitness;
+
     }
 
     public static int timeGenerate()
