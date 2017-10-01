@@ -5,5 +5,5 @@ public static class Reference{
      
     public static char[] Note = new char[]{'d','e','f','e','d','e','a','g','f','d','b','b','a','d','e','f','g','f','e','d'};
 
-    public static int totalTime = 180;
+    public static int totalTime = 52;
 }

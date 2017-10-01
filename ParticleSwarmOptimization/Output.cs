@@ -3,7 +3,7 @@ using System.IO;
 
 public class Output
 {
-    public static void scoreGenerator(Particles[] population, String path)
+/*     public static void scoreGenerator(Particles[] population, String path)
     {
         Stream arquivo = File.Open("entrada.txt", FileMode.Open);
         StreamReader leitor = new StreamReader(arquivo);
@@ -14,7 +14,7 @@ public class Output
             string tagName = String.Format("<name{0}>", i);
             string tagFit = String.Format("<fit{0}>", i);
             string tagNotes = String.Format("<notes{0}>", i);
-            string stgNotes = population[i].showConfiguration();
+       //     string stgNotes = population[i].showConfiguration();
 
             entrada = entrada.Replace(tagName, i.ToString()).Replace(tagFit, population[i].getFitness().ToString()).Replace(tagNotes, stgNotes);
         }
@@ -25,7 +25,7 @@ public class Output
         escritor.Close();
         saida.Close();
     }
-
+ */
     public static void FileWriter(int count, Global gParticle)
     {
 

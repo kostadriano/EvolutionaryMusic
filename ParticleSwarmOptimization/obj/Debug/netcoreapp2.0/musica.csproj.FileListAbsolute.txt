@@ -18,3 +18,13 @@
 /home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.AssemblyInfo.cs
 /home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.dll
 /home/stheffany/GitHub/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.pdb
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/bin/Debug/netcoreapp2.0/musica.deps.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/bin/Debug/netcoreapp2.0/musica.runtimeconfig.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/bin/Debug/netcoreapp2.0/musica.runtimeconfig.dev.json
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/bin/Debug/netcoreapp2.0/musica.dll
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/bin/Debug/netcoreapp2.0/musica.pdb
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.csproj.CoreCompileInputs.cache
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.AssemblyInfoInputs.cache
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.AssemblyInfo.cs
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.dll
+/home/adriano/Dropbox/CC/6_Semestre/ComputacaoNatural/EvolutionaryMusic/ParticleSwarmOptimization/obj/Debug/netcoreapp2.0/musica.pdb

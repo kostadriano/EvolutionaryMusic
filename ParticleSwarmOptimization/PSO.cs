@@ -5,173 +5,166 @@ namespace musicaevolutiva
     public class PSO
     {
 
-        public static int iteration = 20;
-        Global gParticle = new Global();
-        public void Start(Particles[] population)
+        public int maxIteration;
+        Global globalMemory = new Global();
+
+        public PSO(int iteration)
         {
-            try
-            {
-                int count = 0;
-                gParticle.w = (float)0.9;
-
-                while (count < iteration)
-                {
-                    for (int i = 0; i < Particles.PopulationSize; i++)
-                    {
-                        population[i].FitnessCalculate();
-
-                        if (population[i].Fitness < population[i].PFitness)
-                        {
-                            population[i] = UpdateLocalMemory(population[i]);
-                        }
-
-                        if (population[i].Fitness < gParticle.GFitness)
-                        {
-                            gParticle = UpdateGlobalMemory(population[i], gParticle);
-                        }
-
-                        population[i] = SpeedCalculator(population[i]);
-
-                        population[i] = UpdateIndividual(population[i]);
-
-
-                    }
-
-                    Output.FileWriter(count, gParticle);
-
-                    ShowParticle(population[0]);
-
-                    count++;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-
+            maxIteration = iteration;
         }
 
-        public void ShowParticle(Particles population)
+        public int GlobalBest(Particles[] population)
+        {
+            int small = 0;
+            for (int i = 1; i < Particles.PopulationSize; i++)
+            {
+                if (population[i].Fitness < population[small].Fitness)
+                    small = i;
+            }
+
+            return small;
+        }
+        public void Start(Particles[] population)
+        {
+
+            int iteration = 0;
+            globalMemory.w = (float)0.9;
+            int gBest = GlobalBest(population);
+            globalMemory.GFitness = population[gBest].Fitness;
+            globalMemory.GTimes = population[gBest].Times;
+            globalMemory.GNotes = population[gBest].Notes;
+
+
+            while (iteration < maxIteration)
+            {
+                Console.WriteLine(globalMemory.GFitness);
+                for (int i = 0; i < Particles.PopulationSize; i++)
+                {
+                    if (population[i].Fitness < population[i].PFitness)
+                    {
+                        population[i] = UpdateLocalMemory(population[i]);
+                    }
+
+                    if (population[i].Fitness < globalMemory.GFitness)
+                    {
+                        globalMemory = UpdateGlobalMemory(population[i], globalMemory);
+                    }
+                    population[i] = SpeedCalculate(population[i]);
+                    for(int j=0;j<Particles.Size;j++)
+                    Console.Write(population[i].SpeedNotes[j]+" ");
+                    
+                    Console.WriteLine();
+                    population[i] = UpdateParticle(population[i]);
+
+                    population[i] = Particles.FitnessCalculate(population[i]);
+
+                }
+
+                Output.FileWriter(iteration, globalMemory);
+
+                //ShowParticle(population[0]);
+
+                iteration++;
+
+
+            }
+        }
+
+        public void ShowParticle(Particles particle)
         {
             for (int i = 0; i < Particles.Size; i++)
             {
-                Console.Write(population.Notes[i]);
+                Console.Write(particle.Notes[i] + " ");
             }
 
             Console.WriteLine();
 
             for (int i = 0; i < Particles.Size; i++)
             {
-                Console.Write(population.Times[i]);
+                Console.Write(particle.Times[i] + " ");
             }
         }
 
 
-
-        public Particles UpdateIndividual(Particles individual)
+        public Particles UpdateParticle(Particles particle)
         {
-            //Definir como converter resultados para valores discretos
-            for (int j = 0; j < Particles.Size; j++)
-            {
-                individual.Times[j] += individual.PTimes[j];
-                individual.Notes[j] += individual.PNotes[j];
-
-            }
-
-            return individual;
-        }
-
-        public Particles UpdateLocalMemory(Particles individual)
-        {
-            individual.PNotes = individual.Notes;
-            individual.PTimes = individual.Times;
-            individual.PFitness = individual.Fitness;
-
-            return individual;
-        }
-
-        public Global UpdateGlobalMemory(Particles individual, Global gParticle)
-        {
-            gParticle.GNotes = individual.Notes;
-            gParticle.GTimes = individual.Times;
-            gParticle.GFitness = individual.Fitness;
-
-            return gParticle;
-        }
-        public Particles SpeedCalculator(Particles individual)
-        {
-            // Constantes
-            var constant = DefineConstants(gParticle, individual);
-            // Calculo das diferenças
-
-            var auxiliar1 = Difference(individual);
-            var auxiliar2 = Difference(individual, gParticle);
-
-            for (int i = 0; i < Particles.Size; i++)
-            {
-                individual.SpeedTimes[i] += constant.w * individual.SpeedTimes[i];
-                individual.SpeedNotes[i] += constant.w * individual.SpeedNotes[i];
-
-                for (int j = 0; j < Particles.Size; j++)
-                {
-                    individual.SpeedTimes[i] += constant.y1[j] * auxiliar1.differenceTimes[i];
-                    individual.SpeedNotes[i] += constant.y1[j] * auxiliar1.differenceNotes[i];
-
-                    individual.SpeedTimes[i] += constant.y2[j] * auxiliar2.differenceTimes[i];
-                    individual.SpeedNotes[i] += constant.y2[j] * auxiliar2.differenceNotes[i];
-                }
-
-
-            }
-
-            return individual;
-        }
-
-        public (float w, float[] y1, float[] y2) DefineConstants(Global gParticle, Particles individual)
-        {
-
             Random rd = new Random();
-            float wAuxiliar;
-            wAuxiliar = gParticle.w * (float)0.95;
 
-            gParticle.w = wAuxiliar < 0.001 ? (float)0.001 : wAuxiliar;
 
             for (int i = 0; i < Particles.Size; i++)
             {
-                individual.y1[i] = (float)rd.Next(0, 100) / 100;
-                individual.y2[i] = (float)rd.Next(0, 100) / 100;
+                if (particle.SpeedNotes[i] > 3 && particle.Notes[i] < 'g')
+                    particle.Notes[i] = Particles.NoteNames[(Particles.NoteNames.IndexOf(particle.Notes[i]) + 1)];
+                if (particle.SpeedNotes[i] < -3 && particle.Notes[i] > 'a')
+                    particle.Notes[i] = Particles.NoteNames[(Particles.NoteNames.IndexOf(particle.Notes[i]) - 1)];
+
+                if (particle.SpeedTimes[i] > 3 && particle.Times[i] < 32)
+                    particle.Times[i] = (int)Math.Pow(2, ((int)Math.Log(particle.Times[i], 2) + 1));
+                if (particle.SpeedTimes[i] < -3 && particle.Times[i] > 1)
+                    particle.Times[i] = (int)Math.Pow(2, ((int)Math.Log(particle.Times[i], 2) - 1));
             }
+            return particle;
+        }
 
+        public Particles UpdateLocalMemory(Particles particle)
+        {
+            particle.PNotes = particle.Notes;
+            particle.PTimes = particle.Times;
+            particle.PFitness = particle.Fitness;
+            return particle;
+        }
 
-            return (gParticle.w, individual.y1, individual.y2);
+        public Global UpdateGlobalMemory(Particles particle, Global globalMemory)
+        {
+            globalMemory.GNotes = particle.Notes;
+            globalMemory.GTimes = particle.Times;
+            globalMemory.GFitness = particle.Fitness;
+
+            return globalMemory;
+        }
+
+        public int Log(int x)
+        {
+            return (int)Math.Log(x, 2);
+        }
+
+        public Particles SpeedCalculate(Particles individual)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < Particles.Size; i++)
+            {
+                individual.SpeedTimes[i] += ((float)0.3 * (float)random.NextDouble() * Difference(individual).differenceTimes[i]) + ((float)0.7 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceTimes[i]);
+                individual.SpeedNotes[i] += ((float)0.3 * (float)random.NextDouble() * Difference(individual).differenceNotes[i]) + ((float)0.7 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceNotes[i]);
+            }
+            return individual;
         }
 
 
-        public (float[] differenceTimes, int[] differenceNotes) Difference(Particles individual)
+        public (int[] differenceTimes, int[] differenceNotes) Difference(Particles particle)
         {
-            float[] differenceTimes = new float[Particles.Size];
-            int[] differenceNotes = new int[Particles.Size]; // depois converter pra letras
-
+            int[] differenceTimes = new int[Particles.Size];
+            int[] differenceNotes = new int[Particles.Size];
             for (int i = 0; i < Particles.Size; i++)
             {
-                differenceTimes[i] = individual.PTimes[i] - individual.Times[i];
-                differenceNotes[i] = individual.PNotes[i] - individual.Notes[i];
+                differenceTimes[i] = Log(particle.PTimes[i]) - Log(particle.Times[i]);
+                differenceNotes[i] = particle.PNotes[i] - particle.Notes[i];
             }
 
             return (differenceTimes, differenceNotes);
         }
 
-        public (float[] differenceTimes, int[] differenceNotes) Difference(Particles individual, Global globalMemory)
+        public (int[] differenceTimes, int[] differenceNotes) Difference(Particles particle, Global globalMemory)
         {
 
-            float[] differenceTimes = new float[Particles.Size];
-            int[] differenceNotes = new int[Particles.Size]; // depois converter pra letras
+            int[] differenceTimes = new int[Particles.Size];
+            int[] differenceNotes = new int[Particles.Size];
 
 
             for (int i = 0; i < Particles.Size; i++)
             {
-                differenceTimes[i] = individual.PTimes[i] - globalMemory.GTimes[i];
-                differenceNotes[i] = individual.PNotes[i] - globalMemory.GNotes[i];
+                differenceTimes[i] = Log(particle.PTimes[i]) - Log(globalMemory.GTimes[i]);
+                differenceNotes[i] = (particle.PNotes[i] - globalMemory.GNotes[i]);
             }
 
             return (differenceTimes, differenceNotes);
