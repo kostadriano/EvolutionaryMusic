@@ -6,10 +6,15 @@ namespace musicaevolutiva
     {
 
         public int maxIteration;
+        public static double C1;
+        public static double C2;
         Global globalMemory = new Global();
 
-        public PSO(int iteration)
+        public PSO(int iteration, int sizePopulation, double c1, double c2)
         {
+            C1 = c1;
+            C2 = c2;
+            Particles.PopulationSize = sizePopulation;
             maxIteration = iteration;
         }
 
@@ -26,9 +31,7 @@ namespace musicaevolutiva
         }
         public void Start(Particles[] population)
         {
-
             int iteration = 0;
-            globalMemory.w = (float)0.9;
             int gBest = GlobalBest(population);
             globalMemory.GFitness = population[gBest].Fitness;
             globalMemory.GTimes = population[gBest].Times;
@@ -37,36 +40,21 @@ namespace musicaevolutiva
 
             while (iteration < maxIteration)
             {
-                Console.WriteLine(globalMemory.GFitness);
                 for (int i = 0; i < Particles.PopulationSize; i++)
                 {
                     if (population[i].Fitness < population[i].PFitness)
                     {
-                        population[i] = UpdateLocalMemory(population[i]);
+                        UpdateLocalMemory(population[i]);
                     }
-
-                    if (population[i].Fitness < globalMemory.GFitness)
-                    {
-                        globalMemory = UpdateGlobalMemory(population[i], globalMemory);
-                    }
-                    population[i] = SpeedCalculate(population[i]);
-                    for(int j=0;j<Particles.Size;j++)
-                    Console.Write(population[i].SpeedNotes[j]+" ");
-                    
-                    Console.WriteLine();
-                    population[i] = UpdateParticle(population[i]);
-
-                    population[i] = Particles.FitnessCalculate(population[i]);
-
+                    SpeedCalculate(population[i]);
                 }
+                population = UpdateParticles(population);
 
-                Output.FileWriter(iteration, globalMemory);
+                gBest = (int)population[GlobalBest(population)].Fitness;
+                globalMemory.GFitness = globalMemory.GFitness > gBest ? gBest : globalMemory.GFitness;
 
-                //ShowParticle(population[0]);
-
+                Output.FileWriter(iteration, globalMemory, maxIteration);
                 iteration++;
-
-
             }
         }
 
@@ -85,25 +73,34 @@ namespace musicaevolutiva
             }
         }
 
+        public int Direction(int a, int b)
+        {
+            return a - b == 0 ? 0 : a - b > 0 ? -1 : 1;
+        }
 
-        public Particles UpdateParticle(Particles particle)
+        public Particles[] UpdateParticles(Particles[] particles)
         {
             Random rd = new Random();
+            int direction = 0;
 
-
-            for (int i = 0; i < Particles.Size; i++)
+            for (int j = 0; j < Particles.PopulationSize; j++)
             {
-                if (particle.SpeedNotes[i] > 3 && particle.Notes[i] < 'g')
-                    particle.Notes[i] = Particles.NoteNames[(Particles.NoteNames.IndexOf(particle.Notes[i]) + 1)];
-                if (particle.SpeedNotes[i] < -3 && particle.Notes[i] > 'a')
-                    particle.Notes[i] = Particles.NoteNames[(Particles.NoteNames.IndexOf(particle.Notes[i]) - 1)];
+                for (int i = 0; i < Particles.Size; i++)
+                {
+                    direction = Direction(particles[j].Times[i], Reference.Time[i]);
 
-                if (particle.SpeedTimes[i] > 3 && particle.Times[i] < 32)
-                    particle.Times[i] = (int)Math.Pow(2, ((int)Math.Log(particle.Times[i], 2) + 1));
-                if (particle.SpeedTimes[i] < -3 && particle.Times[i] > 1)
-                    particle.Times[i] = (int)Math.Pow(2, ((int)Math.Log(particle.Times[i], 2) - 1));
+                    if (particles[j].Times[i] >= 1 && particles[j].Times[i] <= 32 && rd.NextDouble() > 0.9)
+                        particles[j].Times[i] = (int)Math.Pow(2, ((int)Math.Log(particles[j].Times[i], 2) + direction));
+
+                    direction = Direction(particles[j].Notes[i], Reference.Note[i]);
+
+                    if (particles[j].Notes[i] <= 'g' && particles[j].Notes[i] >= 'a' && rd.NextDouble() > 0.9)
+                        particles[j].Notes[i] = Particles.NoteNames[(Particles.NoteNames.IndexOf(particles[j].Notes[i]) + direction)];
+
+                }
+                particles[j] = Particles.FitnessCalculate(particles[j]);
             }
-            return particle;
+            return particles;
         }
 
         public Particles UpdateLocalMemory(Particles particle)
@@ -134,8 +131,8 @@ namespace musicaevolutiva
 
             for (int i = 0; i < Particles.Size; i++)
             {
-                individual.SpeedTimes[i] += ((float)0.3 * (float)random.NextDouble() * Difference(individual).differenceTimes[i]) + ((float)0.7 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceTimes[i]);
-                individual.SpeedNotes[i] += ((float)0.3 * (float)random.NextDouble() * Difference(individual).differenceNotes[i]) + ((float)0.7 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceNotes[i]);
+                individual.SpeedTimes[i] += ((float)C1 * (float)random.NextDouble() * Difference(individual).differenceTimes[i]) + ((float)C2 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceTimes[i]);
+                individual.SpeedNotes[i] += ((float)C1 * (float)random.NextDouble() * Difference(individual).differenceNotes[i]) + ((float)C2 * (float)random.NextDouble() * Difference(individual, globalMemory).differenceNotes[i]);
             }
             return individual;
         }
@@ -145,6 +142,7 @@ namespace musicaevolutiva
         {
             int[] differenceTimes = new int[Particles.Size];
             int[] differenceNotes = new int[Particles.Size];
+         
             for (int i = 0; i < Particles.Size; i++)
             {
                 differenceTimes[i] = Log(particle.PTimes[i]) - Log(particle.Times[i]);
@@ -169,6 +167,5 @@ namespace musicaevolutiva
 
             return (differenceTimes, differenceNotes);
         }
-
     }
 }

@@ -15,8 +15,6 @@ public class Particles
     private int TotalTime;
     public float Fitness { get; set; }
     public float PFitness { get; set; }
-    public float[] y1 { get; set; }
-    public float[] y2 { get; set; }
 
     public Particles()
     {
@@ -26,8 +24,6 @@ public class Particles
         PNotes = new char[Size];
         SpeedTimes = new float[Size];
         SpeedNotes = new float[Size];
-        y1 = new float[Size];
-        y2 = new float[Size];
         TotalTime = 0;
         Fitness = 0;
     }
@@ -40,10 +36,22 @@ public class Particles
             Times[i] = timeGenerate();
             Notes[i] = NoteNames[rd.Next(0, 7)];
         }
-        // inicializando memória local
-
     }
 
+    public static Particles[] CreatePopulation(Particles[] population)
+    {
+        for (int i = 0; i < population.Length; i++)
+        {
+            population[i] = new Particles();
+            population[i].Initiate();
+            population[i] = Particles.FitnessCalculate(population[i]);
+            population[i].PFitness = population[i].Fitness;
+            population[i].PTimes = population[i].Times;
+            population[i].PNotes = population[i].Notes;
+        }
+
+        return population;
+    }
     public static int timeGenerate()
     {
         Random rd = new Random();
@@ -52,25 +60,17 @@ public class Particles
 
     public static Particles FitnessCalculate(Particles particle)
     {
-        particle.TotalTime=0;
+        particle.TotalTime = 0;
         float temp = 0;
         for (int i = 0; i < Size; i++)
         {
-            particle.TotalTime += (int)(Math.Log(particle.Times[i],2));
-            temp += (float)(Math.Abs(Math.Log(particle.Times[i],2) - Math.Log(Reference.Time[i],2)) + Math.Abs(particle.Notes[i] - Reference.Note[i]));
+            particle.TotalTime += (int)(Math.Log(particle.Times[i], 2));
+            temp += (float)(Math.Abs(Math.Log(particle.Times[i], 2) - Math.Log(Reference.Time[i], 2)) + Math.Abs(particle.Notes[i] - Reference.Note[i]));
         }
         temp += Math.Abs(Reference.totalTime - particle.TotalTime);
         particle.Fitness = temp;
-        
+
         return particle;
     }
-    public static string showConfiguration(int[] array, char[] array2)
-    {
-        string ret = string.Empty;
-        for (int i = 0; i < Size; i++)
-        {
-            ret += array2[i] + "'" + array[i] + " ";
-        }
-        return ret;
-    }
+
 }
