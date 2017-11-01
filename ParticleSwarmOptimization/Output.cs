@@ -9,13 +9,13 @@ namespace musicaevolutiva
         {
             if (count == 0)
             {
-                using (StreamWriter writer = new StreamWriter("gBesttemp.ods", true))
+                using (StreamWriter writer = new StreamWriter("gBest.ods", true))
                 {
                     writer.WriteLine("Population Size," + Particles.PopulationSize + ",Generations," + maxIteration+"\n");
                 }
             }
 
-            using (StreamWriter writer = new StreamWriter("gBesttemp.ods", true))
+            using (StreamWriter writer = new StreamWriter("gBest.ods", true))
             {
                 writer.WriteLine("Generation," + count + ",Global Memory," + gParticle.GFitness);
 
