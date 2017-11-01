@@ -42,7 +42,7 @@ namespace musicaevolutiva
             {
                 for (int i = 0; i < Particles.PopulationSize; i++)
                 {
-                    if (population[i].Fitness < population[i].PFitness)
+                    if (population[i].Fitness < population[i].LocalMemoryFitness)
                     {
                         UpdateLocalMemory(population[i]);
                     }
@@ -105,9 +105,9 @@ namespace musicaevolutiva
 
         public Particles UpdateLocalMemory(Particles particle)
         {
-            particle.PNotes = particle.Notes;
-            particle.PTimes = particle.Times;
-            particle.PFitness = particle.Fitness;
+            particle.LocalMemoryNotes = particle.Notes;
+            particle.LocalMemoryTimes = particle.Times;
+            particle.LocalMemoryFitness = particle.Fitness;
             return particle;
         }
 
@@ -145,8 +145,8 @@ namespace musicaevolutiva
          
             for (int i = 0; i < Particles.Size; i++)
             {
-                differenceTimes[i] = Log(particle.PTimes[i]) - Log(particle.Times[i]);
-                differenceNotes[i] = particle.PNotes[i] - particle.Notes[i];
+                differenceTimes[i] = Log(particle.LocalMemoryTimes[i]) - Log(particle.Times[i]);
+                differenceNotes[i] = particle.LocalMemoryNotes[i] - particle.Notes[i];
             }
 
             return (differenceTimes, differenceNotes);
@@ -161,8 +161,8 @@ namespace musicaevolutiva
 
             for (int i = 0; i < Particles.Size; i++)
             {
-                differenceTimes[i] = Log(particle.PTimes[i]) - Log(globalMemory.GTimes[i]);
-                differenceNotes[i] = (particle.PNotes[i] - globalMemory.GNotes[i]);
+                differenceTimes[i] = Log(particle.LocalMemoryTimes[i]) - Log(globalMemory.GTimes[i]);
+                differenceNotes[i] = (particle.LocalMemoryNotes[i] - globalMemory.GNotes[i]);
             }
 
             return (differenceTimes, differenceNotes);

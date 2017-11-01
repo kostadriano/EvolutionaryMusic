@@ -9,19 +9,19 @@ public class Particles
     public char[] Notes { get; set; }
     public float[] SpeedNotes { get; set; }
     public float[] SpeedTimes { get; set; }
-    public char[] PNotes { get; set; }
-    public int[] PTimes { get; set; }
+    public char[] LocalMemoryNotes { get; set; }
+    public int[] LocalMemoryTimes { get; set; }
     public static int PopulationSize;
     private int TotalTime;
     public float Fitness { get; set; }
-    public float PFitness { get; set; }
+    public float LocalMemoryFitness { get; set; }
 
     public Particles()
     {
         Notes = new char[Size];
         Times = new int[Size];
-        PTimes = new int[Size];
-        PNotes = new char[Size];
+        LocalMemoryTimes = new int[Size];
+        LocalMemoryNotes = new char[Size];
         SpeedTimes = new float[Size];
         SpeedNotes = new float[Size];
         TotalTime = 0;
@@ -45,9 +45,9 @@ public class Particles
             population[i] = new Particles();
             population[i].Initiate();
             population[i] = Particles.FitnessCalculate(population[i]);
-            population[i].PFitness = population[i].Fitness;
-            population[i].PTimes = population[i].Times;
-            population[i].PNotes = population[i].Notes;
+            population[i].LocalMemoryFitness = population[i].Fitness;
+            population[i].LocalMemoryTimes = population[i].Times;
+            population[i].LocalMemoryNotes = population[i].Notes;
         }
 
         return population;
