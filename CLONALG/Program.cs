@@ -7,41 +7,19 @@ namespace musicaevolutiva
     {
         static void Main(string[] args)
         {
-            Individuals.PopulationSize = 50;
-            int NGeracoes = 20;
-            Individuals[] population = new Individuals[Individuals.PopulationSize];
+            Clonalg Clonalg = new Clonalg(10,50, 0.4, 10);
 
-            for (int i = 0; i < population.Length; i++)
+            Cell[] Cells = new Cell[Cell.PopulationSize];
+            for (int i = 0; i < Clonalg.PopulationSize; i++)
             {
-                population[i] = new Individuals();
-                population[i].Initiate();
-                population[i].FitnessCalculate();
+                Cells[i] = new Cell();
+                Cells[i].Initiate();
+                Cells[i].FitnessCalculate();
             }
-            population = AG.OrderBy(population);
-            Output.scoreGenerator(population, "populacaooriginal.ly");
+            Cells = Clonalg.OrderBy(Cells);
 
-            AG ag = new AG();
-            int g = 0;
+            Clonalg.Start(Cells);
 
-            using (StreamWriter writer = new StreamWriter("melhores.ods", true))
-            {
-                writer.WriteLine("Geracoes:," + NGeracoes + ",Tamanho da Populacao," + Individuals.PopulationSize);
-                writer.WriteLine("Selecionados," + Individuals.PopulationSize * 0.3 + ",Mutação, 0.10");
-          
-            }
-
-            do
-            {
-                population = ag.Iniciate(population);
-
-                using (StreamWriter writer = new StreamWriter("melhores.ods", true))
-                {
-                    writer.WriteLine("Geracao:," + g + ",Fitness," + population[0].getFitness());
-                }
-                g++;
-
-            } while ((g < NGeracoes) && (population[0].getFitness() > 0));
-            Output.scoreGenerator(population, "novapopulacao.ly");
         }
     }
 

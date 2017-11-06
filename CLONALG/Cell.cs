@@ -5,7 +5,7 @@ public class Cell
     public static string NoteNames = "abcdefg";
     private int[] Times;
     private char[] Notes;
-    public static int PopulationSize;
+    public static int PopulationSize = 50;
     private int TotalTime;
     private float Fitness;
 
