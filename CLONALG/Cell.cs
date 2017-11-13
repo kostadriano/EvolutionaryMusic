@@ -5,7 +5,6 @@ public class Cell
     public static string NoteNames = "abcdefg";
     private int[] Times;
     private char[] Notes;
-    public static int PopulationSize = 50;
     private int TotalTime;
     private float Fitness;
 
@@ -35,6 +34,7 @@ public class Cell
     public void FitnessCalculate()
     {
         float temp = 0;
+        TotalTime = 0;
         for (int i = 0; i < Size; i++)
         {
             TotalTime += (int)Times[i];
@@ -43,6 +43,7 @@ public class Cell
         temp += Math.Abs(Reference.totalTime - TotalTime);
         Fitness = temp;
     }
+
     public string showConfiguration()
     {
         string ret = string.Empty;
@@ -54,6 +55,10 @@ public class Cell
         return ret;
     }
 
+    public void setFitness(float newF)
+    {
+        Fitness = newF;
+    }
 
     public int[] getTimes()
     {
